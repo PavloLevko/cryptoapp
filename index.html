@@ -1,10 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Animation</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #000;
+color: #0f0;
+text-align: center;
+margin: 0;
+padding: 20px;
+}
+h1 {
+font-size: 32px;
+margin-bottom: 20px;
+}
+.container {
+display: flex;
+justify-content: center;
+gap: 20px;
+margin-bottom: 20px;
+}
+.crypto-button {
+background-color: #333;
+border: none;
+border-radius: 10px;
+padding: 10px;
+cursor: pointer;
+}
+.crypto-button img {
+width: 50px;
+height: 50px;
+}
+.animation-box {
+font-family: "Courier New", monospace;
+font-size: 16px;
+white-space: pre-wrap;
+text-align: left;
+margin: 20px auto 0;
+background-color: #111;
+border: 2px solid #0f0;
+border-radius: 10px;
+padding: 10px;
+width: 90%;
+max-width: 600px;
+height: 300px;
+overflow-y: auto;
+}
+.wallet-form {
+margin-top: 20px;
+padding: 20px;
+border: 2px solid #0f0;
+border-radius: 10px;
+background-color: #111;
+color: #fff;
+width: 90%;
+max-width: 600px;
+margin-left: auto;
+margin-right: auto;
+}
+.wallet-form input[type="text"] {
+width: calc(100% - 24px);
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid #0f0;
+border-radius: 5px;
+background-color: #222;
+color: #fff;
+}
+.wallet-form button {
+width: 100%;
+padding: 10px;
+border: none;
+border-radius: 5px;
+background-color: #0f0;
+color: #000;
+font-weight: bold;
+cursor: pointer;
+}
+.wallet-form button:hover {
+background-color: #0c0;
+}
+</style>
 </head>
 <body>
+<h1>SELECT BLOCKCHAIN</h1>
+<div class="container">
+<button class="crypto-button" onclick="startAnimation('bitcoin')">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Bitcoin.png" alt="Bitcoin">
+</button>
+<button class="crypto-button" onclick="startAnimation('ethereum')">
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/01/Ethereum_logo_translucent.svg" alt="Ethereum">
+</button>
+<button class="crypto-button" onclick="startAnimation('litecoin')">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Official_Litecoin_Logo.png" alt="Litecoin">
+</button>
 
+</div>
+<div class="animation-box" id="animation-box"></div>
+<p>Insert your crypto wallet number here when the coins are found!</p>
+<form class="wallet-form">
+<input type="text" value="Search for a key..." disabled onclick="showCryptoWalletPrompt()">
+<button type="button" onclick="showDonationAddress()">Donate</button>
+</form>
+<script>
+let interval; // Глобальна змінна для збереження стану анімації
+
+function startAnimation(blockchain) {
+const animationBox = document.getElementById('animation-box');
+clearInterval(interval); // Зупиняємо попередню анімацію, якщо вона була
+animationBox.innerHTML = `Generating keys for ${blockchain.toUpperCase()}...\n`;
+
+interval = setInterval(() => {
+const randomKey = Array(64)
+.fill(0)
+.map(() => String.fromCharCode(33 + Math.random() * 94))
+.join('');
+animationBox.textContent += `${randomKey}\n`;
+animationBox.scrollTop = animationBox.scrollHeight; // Автопрокрутка до останнього рядка
+}, 100);
+}
+
+function showDonationAddress() {
+const walletAddress = "TAhvdT1W9bc1nPHErJTCnpSkGsxVtuHU9d";
+const message = `Receive USDT on TRC20 to:\n\n${walletAddress}`;
+alert(message); // Спливаюче вікно з інформацією
+}
+
+function showCryptoWalletPrompt() {
+alert("Insert your crypto wallet number here when the coins are found!");
+}
+</script>
 </body>
 </html>
