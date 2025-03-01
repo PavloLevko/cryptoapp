@@ -1,201 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crypto Animation</title>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #0f0;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
-}
-h1 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-.container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-.crypto-button {
-    background-color: #333;
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    cursor: pointer;
-}
-.crypto-button img {
-    width: 50px;
-    height: 50px;
-}
-.animation-box {
-    font-family: "Courier New", monospace;
-    font-size: 16px;
-    white-space: pre-wrap;
-    text-align: left;
-    margin: 20px auto 0;
-    background-color: #111;
-    border: 2px solid #0f0;
-    border-radius: 10px;
-    padding: 10px;
-    width: 90%;
-    max-width: 600px;
-    height: 300px;
-    overflow-y: auto;
-}
-.counter-box, .found-box, .withdraw-box {
-    margin-top: 10px;
-    padding: 10px;
-    border: 2px solid #0f0;
-    border-radius: 10px;
-    background-color: #111;
-    width: 90%;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-.withdraw-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #0f0;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-}
-.withdraw-button:hover {
-    background-color: #0c0;
-}
-.wallet-form {
-    margin-top: 20px;
-    padding: 20px;
-    border: 2px solid #0f0;
-    border-radius: 10px;
-    background-color: #111;
-    color: #fff;
-    width: 90%;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.wallet-form input[type="text"] {
-    width: calc(100% - 24px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #0f0;
-    border-radius: 5px;
-    background-color: #222;
-    color: #fff;
-}
-.wallet-form button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #0f0;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-}
-.wallet-form button:hover {
-    background-color: #0c0;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEO SHOES – Якісне шкіряне взуття</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f3e5d8; /* Бежевий фон */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+        h1 {
+            color: #5a3827; /* Темно-коричневий */
+        }
+        p {
+            color: #6d4c3d; /* Світло-коричневий */
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 18px;
+            color: white;
+            background-color: #8b5e3c; /* Темно-коричневий */
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #5a3827; /* Ще темніший відтінок */
+        }
+        /* СТИЛІ ДЛЯ КАРУСЕЛІ */
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        .carousel img {
+            width: 100%;
+            display: none;
+            border-radius: 10px;
+        }
+        .carousel img.active {
+            display: block;
+        }
+        .carousel-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .carousel-btn {
+            background-color: #8b5e3c; /* Темно-коричневий */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .carousel-btn:hover {
+            background-color: #5a3827; /* Ще темніший */
+        }
+        /* ФУТЕР */
+        .footer {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #5a3827; /* Темно-коричневий */
+            color: white;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .footer a {
+            color: #d4af7a; /* Золотистий відтінок */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<h1>SELECT BLOCKCHAIN</h1>
-<div class="container">
-    <button class="crypto-button" onclick="startAnimation('bitcoin')">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Bitcoin.png" alt="Bitcoin">
-    </button>
-    <button class="crypto-button" onclick="startAnimation('ethereum')">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/Ethereum_logo_translucent.svg" alt="Ethereum">
-    </button>
-    <button class="crypto-button" onclick="startAnimation('litecoin')">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Official_Litecoin_Logo.png" alt="Litecoin">
-    </button>
-</div>
-<div class="animation-box" id="animation-box"></div>
-<div class="counter-box" id="counter-box">
-    Wallets Checked: <span id="wallet-counter">0</span>
-</div>
-<div class="found-box" id="found-box">
-    Found: <span id="found-crypto">None</span>
-</div>
-<div class="withdraw-box">
-    <button onclick="withdrawCrypto()" class="withdraw-button">Withdraw Crypto to Wallet</button>
-</div>
-<p>Insert your crypto wallet number here when the coins are found!</p>
-<form class="wallet-form">
-    <input type="text" value="Search for a key..." disabled onclick="showCryptoWalletPrompt()">
-    <button type="button" onclick="showDonationAddress()">Donate</button>
-</form>
-<script>
-let interval; 
-let walletCounterInterval; 
-let foundCryptoInterval; 
-let walletCount = 0;
 
-function startAnimation(blockchain) {
-    const animationBox = document.getElementById('animation-box');
-    const walletCounter = document.getElementById('wallet-counter');
-    const foundCrypto = document.getElementById('found-crypto');
+    <div class="container">
+        <h1>LEO SHOES</h1>
+        <p>Магазин якісного шкіряного взуття. Ми пропонуємо тільки найкраще для вас!</p>
 
-    clearInterval(interval);
-    clearInterval(walletCounterInterval);
-    clearInterval(foundCryptoInterval);
+        <!-- КАРУСЕЛЬ -->
+        <div class="carousel">
+            <img src="https://sezon.ua/image/catalog/image/easyfoto/15613/kedy-aesd-584878-belye-1.jpg" class="active" alt="Взуття 1">
+            <img src="https://images.prom.ua/6144023149_w640_h640_6144023149.jpg.jpg" alt="Взуття 2">
+            <img src="https://images.prom.ua/5351186921_w640_h640_5351186921.jpg" alt="Взуття 3">
+        </div>
+        <div class="carousel-buttons">
+            <button class="carousel-btn" onclick="prevSlide()">⬅</button>
+            <button class="carousel-btn" onclick="nextSlide()">➡</button>
+        </div>
 
-    animationBox.innerHTML = `Generating keys for ${blockchain.toUpperCase()}...\n`;
-    foundCrypto.textContent = "None";
-    walletCount = 0;
+        <p>Зробіть замовлення просто зараз!</p>
+        <a href="https://t.me/leo_shoessss" class="btn">Замовити</a>
+    </div>
 
-    interval = setInterval(() => {
-        const randomKey = Array(64)
-            .fill(0)
-            .map(() => String.fromCharCode(33 + Math.random() * 94))
-            .join('');
-        animationBox.textContent += `${randomKey}\n`;
-        animationBox.scrollTop = animationBox.scrollHeight;
-    }, 100);
+    <!-- ФУТЕР -->
+    <div class="footer">
+        <p>Телефон: <a href="tel:+380930693363">+380930693363</a></p>
+        <p>Instagram: <a href="https://instagram.com/leo_shoesss" target="_blank">Наш інстаграм</a></p>
+        <p>Група в телеграм: <a href="https://t.me/leo_shoesss" target="_blank">Наш телеграм канал</a></p>
+    </div>
 
-    walletCounterInterval = setInterval(() => {
-        walletCount += 3;
-        walletCounter.textContent = walletCount;
-    }, 1000);
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
 
-    foundCryptoInterval = setInterval(() => {
-        const cryptoAmount = (Math.random() * (0.02 - 0.0005) + 0.0005).toFixed(4);
-        const cryptoType = blockchain.toUpperCase();
-        foundCrypto.textContent = `${cryptoType} ${cryptoAmount}`;
-    }, 20000);
-}
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
 
-function showDonationAddress() {
-    const walletAddress = "TAhvdT1W9bc1nPHErJTCnpSkGsxVtuHU9d";
-    const message = `Receive USDT on TRC20 to:\n\n${walletAddress}`;
-    alert(message);
-}
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
 
-function showCryptoWalletPrompt() {
-    alert("Insert your crypto wallet number here when the coins are found!");
-}
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
 
-function withdrawCrypto() {
-    const cryptoDetails = document.getElementById('found-crypto').textContent;
-    if (cryptoDetails === "None") {
-        alert("No crypto found yet. Please wait for the process to complete.");
-    } else {
-        alert(`Your ${cryptoDetails} will be sent to the wallet you specify.`);
-    }
-}
-</script>
+        // Автоматична зміна слайдів кожні 3 секунди
+        setInterval(nextSlide, 3000);
+    </script>
+
 </body>
 </html>
