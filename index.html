@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LEO SHOES – Якісне шкіряне взуття</title>
-    <style>
+     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -43,6 +44,44 @@
         .btn:hover {
             background-color: #5a3827; /* Ще темніший відтінок */
         }
+        /* СТИЛІ ДЛЯ ВІДГУКІВ */
+        .review-carousel {
+            position: relative;
+            padding: 15px;
+            background-color: #f8efe6; /* Світло-бежевий */
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        .review {
+            display: none;
+            padding: 10px;
+            border-left: 4px solid #8b5e3c;
+            background: #fff;
+            border-radius: 5px;
+        }
+        .review.active {
+            display: block;
+        }
+        .review strong {
+            color: #5a3827;
+        }
+        .review-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .review-btn {
+            background-color: #8b5e3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .review-btn:hover {
+            background-color: #5a3827;
+        }
         /* СТИЛІ ДЛЯ КАРУСЕЛІ */
         .carousel {
             position: relative;
@@ -65,7 +104,7 @@
             margin-top: 10px;
         }
         .carousel-btn {
-            background-color: #8b5e3c; /* Темно-коричневий */
+            background-color: #8b5e3c;
             color: white;
             border: none;
             padding: 10px 15px;
@@ -73,20 +112,20 @@
             border-radius: 5px;
         }
         .carousel-btn:hover {
-            background-color: #5a3827; /* Ще темніший */
+            background-color: #5a3827;
         }
         /* ФУТЕР */
         .footer {
             margin-top: 20px;
             padding: 15px;
-            background-color: #5a3827; /* Темно-коричневий */
+            background-color: #5a3827;
             color: white;
             border-radius: 5px;
             width: 100%;
             max-width: 600px;
         }
         .footer a {
-            color: #d4af7a; /* Золотистий відтінок */
+            color: #d4af7a;
             text-decoration: none;
             font-weight: bold;
         }
@@ -100,7 +139,14 @@
     <div class="container">
         <h1>LEO SHOES</h1>
         <p>Магазин якісного шкіряного взуття. Ми пропонуємо тільки найкраще для вас!</p>
-
+ <div class="review-carousel">
+            <h2>Відгуки наших клієнтів</h2>
+            <div class="review active"><strong>Анна:</strong> Дуже дякую за кросівки. Дуже добре сидять на нозі.</div>
+            <div class="review"><strong>Марія:</strong> Уги отримала. Дуже гарні. Кращі ніж на фото.</div>
+            <div class="review"><strong>Катя:</strong> Лофери дуже зручні та легкі. Дякую!</div>
+          
+        </div>
+   <a href="https://t.me/leo_shoessss" class="btn">Замовити</a>
         <!-- КАРУСЕЛЬ -->
         <div class="carousel">
             <img src="https://sezon.ua/image/catalog/image/easyfoto/15613/kedy-aesd-584878-belye-1.jpg" class="active" alt="Взуття 1">
@@ -124,6 +170,27 @@
     </div>
 
     <script>
+        let currentReview = 0;
+        const reviews = document.querySelectorAll('.review');
+
+        function showReview(index) {
+            reviews.forEach((review, i) => {
+                review.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextReview() {
+            currentReview = (currentReview + 1) % reviews.length;
+            showReview(currentReview);
+        }
+
+        function prevReview() {
+            currentReview = (currentReview - 1 + reviews.length) % reviews.length;
+            showReview(currentReview);
+        }
+
+        setInterval(nextReview, 4000); // Зміна відгуків кожні 4 секунди
+
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel img');
 
@@ -143,9 +210,9 @@
             showSlide(currentSlide);
         }
 
-        // Автоматична зміна слайдів кожні 3 секунди
-        setInterval(nextSlide, 3000);
+        setInterval(nextSlide, 3000); // Зміна зображень кожні 3 секунди
     </script>
+
 
 </body>
 </html>
